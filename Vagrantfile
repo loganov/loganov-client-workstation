@@ -14,8 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box = 'digital_ocean'
     override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
-#   These environment variables will be set by Jenkins @ runtime.
-#   Token is replacing Client Id and API Key.
+    # These environment variables will be set by Jenkins @ runtime.
+    # Token is replacing Client Id and API Key.
 
     provider.token = ENV['DIGITAL_OCEAN_TOKEN']
     provider.client_id = ENV['DIGITAL_OCEAN_CLIENT_ID']
@@ -24,9 +24,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # - Switching to CentOS 7 from Ubuntu 14.04-1
     # - API_Key and Client_Id will give way to token. See Below.
 
+    # San Francisco 1, 1CPU/512Mb/20GB, Centos 7 x86_64
     provider.region = 'sfo1'
     provider.size = '512mb'
-    provider.image = 'CentOS 7.0 x64'
+    #provider.image = 'Ubuntu 14.04 x64'
+    provider.image = "CentOS 7.0 x64"
+
   end
 
   config.omnibus.chef_version = :latest
@@ -36,11 +39,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     node.vm.provision :chef_client do |chef|
       chef.chef_server_url = 'https://chef.loganov.com:443'
-      chef.validation_key_path = 'validation.pem'
+      chef.validation_key_path = '/etc/chef-client/validation.pem'
       chef.validation_client_name = 'chef-validator'
       chef.delete_node = true
       chef.delete_client = true
-      chef.add_recipe('loganov-cron')
+      #chef.add_role('loganov-base')
+      chef.add_recipe('loganov-client-workstation')
     end
 
   end
