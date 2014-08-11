@@ -10,6 +10,7 @@
 ## Ruby
 # *download source
 # *compile / make install
+# *ensure PATH
 
 ## Vagrant
 # *rpm_package local install?
@@ -20,6 +21,7 @@
 # *directory /opt/sublimetext2
 # *mv directory from /tmp to /opt/sublimetext2
 # *create editor group
+# *add user to editor group
 
 ## VirtualBox
 # *remote_file for .asc key

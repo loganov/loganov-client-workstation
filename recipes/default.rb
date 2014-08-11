@@ -8,13 +8,13 @@
 #
 
 # RedHat/Centos? Groups of Packages
-include_recipe 'package-groups'
+include_recipe 'loganov-client-workstation::package-groups'
 
 # Respositories & Keys
-include_recipe 'repos'
+include_recipe 'loganov-client-workstation::repos'
 
 # Packages to be installed by LWRP `rpm_package`
-include_recipe 'packages'
+include_recipe 'loganov-client-workstation::packages'
 
 # Packages from source, or 3rd Party Binaries
-include_recipe 'source'
+include_recipe 'loganov-client-workstation::source'

@@ -18,13 +18,11 @@ package 'gdisk'
 ## Git
 # `git config --global user.name "Your Name"`
 # `git config --global user.email you@example.com`
-
 package 'git'
-
 
 ## MDADM RAID Tools
 package 'mdadm'
 
 # if repo is present install package -> Find a check for this. Else throw error.
-package 'vlc'
+#package 'vlc'
 
