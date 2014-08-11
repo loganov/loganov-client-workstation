@@ -41,6 +41,15 @@ cookbook_file 'RPM-GPG-KEY-rpmforge-dag' do
     action :create
 end
 
+### Nux Desktop
+cookbook_file 'RPM-GPG-KEY-nux.ro' do
+    path   '/etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro'
+    owner  'root'
+    group  'root'
+    mode   '0644'
+    action :create
+end
+
 ## Yum
 
 ### EPEL Base
@@ -64,7 +73,7 @@ end
 ### ELRepo
 yum_repository 'elrepo' do
     description 'Extra Packages for Enterprise Linux 7 - $basearch'
-    mirrorlist 'https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch'
+    mirrorlist 'http://mirrors.elrepo.org/mirrors-elrepo.el7'
     #baseurl ''
     gpgcheck false
     gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org'
@@ -102,6 +111,26 @@ yum_repository 'google-chrome' do
     action :create
 end
 
+## Nux Desktop
+yum_repository 'nux-desktop'
+    description 'Nux.Ro RPMs for general desktop use'
+    baseurl 'http://li.nux.ro/download/nux/dextop/el7/$basearch/ http://mirror.li.nux.ro/li.nux.ro/nux/dextop/el7/$basearch/'
+    #mirrolist ''
+    enabled true
+    gpgcheck true
+    gpgkey='file:///etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro'
+end
+
+## Nux Desktop Testing
+yum_repository 'nux-desktop-testing' do
+    description 'Nux.Ro RPMs for general desktop use - testing'
+    baseurl 'http://li.nux.ro/download/nux/dextop-testing/el7/$basearch/'
+    #mirrolist ''
+    enabled false
+    gpgcheck true
+    gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro'
+end
+
 ## 32-Bit Compat Packages
 #yum_repository 'nux-desktop' do
     
@@ -119,3 +148,4 @@ end
 #   epel-testing.repo   mirrors-rpmforge-extras   rpmforge.repo
 #   elrepo.repo        google-chrome.repo  mirrors-rpmforge-testing  steam_fedora19.repo
 #     epel.repo          mirrors-rpmforge    nux-dextop.repo
+
