@@ -26,3 +26,6 @@ package 'mdadm'
 # if repo is present install package -> Find a check for this. Else throw error.
 #package 'vlc'
 
+## Google Chrome
+package 'google-chrome-stable'
+
