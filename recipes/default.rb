@@ -1,12 +1,20 @@
-#http://media.steampowered.com/client/installer/steam.deb
+#
+# Cookbook Name:: loganov-client-workstation
+# Recipe:: default
+#
+# Copyright 2014, Loganov Industries, LLC
+#
+# All rights reserved - Do Not Redistribute
+#
 
-#[steam_fedora19]
-#name=Steam RPM packages (and dependencies) for Fedora
-#baseurl=http://negativo17.org/repos/steam/fedora-19/x86_64/
-#enabled=0
-#skip_if_unavailable=1
-#gpgcheck=0
+# RedHat/Centos? Groups of Packages
+include_recipe 'package-groups'
 
-#yum install http://download1.rpmfusion.org/free/fedora/releases/19/Everything/i386/os/libtxc_dxtn-1.0.0-3.fc19.i686.rpm
+# Respositories & Keys
+include_recipe 'repos'
 
-#yum --enablerepo=steam_fedora19 install steam
+# Packages to be installed by LWRP `rpm_package`
+include_recipe 'packages'
+
+# Packages from source, or 3rd Party Binaries
+include_recipe 'source'
