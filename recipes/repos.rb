@@ -50,6 +50,15 @@ cookbook_file 'RPM-GPG-KEY-nux.ro' do
     action :create
 end
 
+### Elastic Search & Logstash
+cookbook_file 'RPM-GPG-KEY-nux.ro' do
+    path   '/etc/pki/rpm-gpg/GPG-KEY-elasticsearch'
+    owner  'root'
+    group  'root'
+    mode   '0644'
+    action :create
+end
+
 ## Yum
 
 ### EPEL Base
@@ -64,11 +73,6 @@ yum_repository 'epel' do
     enabled true
     action :create
 end
-
-### EPEL Testing
-#yum_repository 'epel-testing' do
-    
-#end
 
 ### ELRepo
 yum_repository 'elrepo' do
@@ -95,57 +99,40 @@ yum_repository 'rpmforge' do
     action :create
 end
 
-## RPMForge Testing
-#yum_repository 'rpmforge-testing' do
-    
-#end
-
-## Google Chrome
-yum_repository 'google-chrome' do
-    description 'google-chrome'
-    baseurl 'http://dl.google.com/linux/chrome/rpm/stable/x86_64'
-    #mirrolist ''
-    gpgcheck true
-    sslverify false
-    enabled true   
-    action :create
-end
-
-## Nux Desktop
-yum_repository 'nux-desktop'
+### Nux Desktop
+yum_repository 'nux-desktop' do
     description 'Nux.Ro RPMs for general desktop use'
     baseurl 'http://li.nux.ro/download/nux/dextop/el7/$basearch/ http://mirror.li.nux.ro/li.nux.ro/nux/dextop/el7/$basearch/'
     #mirrolist ''
     enabled true
     gpgcheck true
-    gpgkey='file:///etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro'
-end
-
-## Nux Desktop Testing
-yum_repository 'nux-desktop-testing' do
-    description 'Nux.Ro RPMs for general desktop use - testing'
-    baseurl 'http://li.nux.ro/download/nux/dextop-testing/el7/$basearch/'
-    #mirrolist ''
-    enabled false
-    gpgcheck true
     gpgkey 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-nux.ro'
 end
 
-## 32-Bit Compat Packages
-#yum_repository 'nux-desktop' do
-    
-#end
+### Elasticsearch
+yum_repository 'elasticsearch' do
+    description 'Elasticsearch repository for 1.1.x packages'
+    baseurl 'http://packages.elasticsearch.org/elasticsearch/1.1/centos'
+    enabled true
+    gpgcheck true
+    gpgkey 'file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch'
+end
 
-## Steam RPM Repo
-#yum_repository 'steam_fedora19' do
-    
-#end
+### Logstash
+yum_repository 'logstash-1.4' do
+    description 'logstash repository for 1.4.x packages'
+    baseurl 'http://packages.elasticsearch.org/logstash/1.4/centos'
+    enabled true
+    gpgcheck true
+    gpgkey 'file:///etc/pki/rpm-gpg/GPG-KEY-elasticsearch'
+end
 
-# ----
-
-# Move rpmforge, and it's repo and mirror files into it's own cookbook?
-
-#   epel-testing.repo   mirrors-rpmforge-extras   rpmforge.repo
-#   elrepo.repo        google-chrome.repo  mirrors-rpmforge-testing  steam_fedora19.repo
-#     epel.repo          mirrors-rpmforge    nux-dextop.repo
-
+### Google Chrome
+yum_repository 'google-chrome' do
+    description 'google-chrome'
+    baseurl 'http://dl.google.com/linux/chrome/rpm/stable/x86_64'
+    gpgcheck false
+    sslverify false
+    enabled true   
+    action :create
+end

@@ -7,7 +7,7 @@
 
 # Ruby 
 #default['loganov']['client-workstation']['ruby']['version'] = 
-#default['loganov']['client-workstation']['ruby']['url'] = 
+default['ruby']['url'] = 'http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz'
 
 # Sublime Text 2
 #default['loganov']['client-workstation']['sublime_text_2']['url'] = 

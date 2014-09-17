@@ -17,4 +17,4 @@ include_recipe 'loganov-client-workstation::repos'
 include_recipe 'loganov-client-workstation::packages'
 
 # Packages from source, or 3rd Party Binaries
-include_recipe 'loganov-client-workstation::source'
+#include_recipe 'loganov-client-workstation::source'

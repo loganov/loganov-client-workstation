@@ -4,7 +4,7 @@ maintainer_email 'devops@loganov.com'
 license          'All rights reserved'
 description      'Master build for client workstations.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.1.7'
+version          '0.1.8'
 
 recipe            'loganov-client-workstation', 'Default Client Workstation Configuration'
 recipe            'loganov-client-workstation::package-groups', ''

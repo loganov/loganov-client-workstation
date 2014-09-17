@@ -12,6 +12,20 @@
 # *compile / make install
 # *ensure PATH
 
+remote_file '/tmp/ruby.tar.gz' do
+	source node['ruby']['url']
+end
+
+bash "ruby" do
+	code <<-EOH
+    tar -xpvzf /tmp/ruby.tar.gz
+    cd ruby
+    ./configure
+    make
+    make install
+	EOH
+end
+
 ## Vagrant
 # *rpm_package local install?
 
